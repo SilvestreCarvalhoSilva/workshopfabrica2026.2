@@ -1,0 +1,221 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+Cadastrar Produto - Sistema Agro
+{% endblock %}
+
+
+{% block content %}
+
+<div class="formulario-container">
+
+    <h1>Cadastrar Produto</h1>
+
+    <p>
+        Cadastre um novo produto agropecuário.
+    </p>
+
+
+    <form method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+
+        <div class="campo">
+
+            <label for="nome">
+                Nome do produto
+            </label>
+
+            <input
+                type="text"
+                id="nome"
+                name="nome"
+                placeholder="Digite o nome do produto"
+                required
+            >
+
+        </div>
+
+
+        <!-- DESCRIÇÃO DO PRODUTO -->
+
+        <div class="campo">
+
+            <label for="descricao">
+                Descrição do produto
+            </label>
+
+            <textarea
+                id="descricao"
+                name="descricao"
+                rows="5"
+                placeholder="Digite a descrição do produto"
+            ></textarea>
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="preco">
+                Preço
+            </label>
+
+            <input
+                type="number"
+                id="preco"
+                name="preco"
+                step="0.01"
+                placeholder="0.00"
+                required
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="quantidade">
+                Quantidade
+            </label>
+
+            <input
+                type="number"
+                id="quantidade"
+                name="quantidade"
+                min="0"
+                placeholder="Digite a quantidade"
+                required
+            >
+
+        </div>
+
+
+        <!-- IMAGEM DO PRODUTO -->
+
+<div class="campo">
+
+
+<label for="imagem">
+    Imagem do produto
+</label>
+
+<input
+    type="file"
+    id="imagem"
+    name="imagem"
+    accept="image/*"
+>
+
+
+</div>
+
+        <!-- VÍDEO DO PRODUTO -->
+
+        <div class="campo">
+
+
+        <label for="video">
+            Vídeo do produto
+        </label>
+
+        <input
+            type="file"
+            id="video"
+            name="video"
+            accept="video/*"
+        >
+
+
+</div>
+
+
+        
+
+
+        <div class="campo">
+
+            <label for="categoria">
+                Categoria
+            </label>
+
+            {% if categorias %}
+
+                <select
+                    id="categoria"
+                    name="categoria"
+                    required
+                >
+
+                    <option value="">
+                        Selecione uma categoria
+                    </option>
+
+                    {% for categoria in categorias %}
+
+                        <option value="{{ categoria.id }}">
+                            {{ categoria.nome }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+            {% else %}
+
+                <div class="mensagem-erro">
+
+                    Nenhuma categoria cadastrada.
+                    Primeiro cadastre uma categoria em
+
+                    <a href="{% url 'lista_categorias' %}">
+                        Categorias
+                    </a>.
+
+                </div>
+
+                <select
+                    id="categoria"
+                    name="categoria"
+                    required
+                    disabled
+                >
+
+                    <option value="">
+                        Nenhuma categoria disponível
+                    </option>
+
+                </select>
+
+            {% endif %}
+
+        </div>
+
+
+        <div class="acoes-formulario">
+
+            <a
+                href="{% url 'lista_produtos' %}"
+                class="botao"
+            >
+                Cancelar
+            </a>
+
+
+            <button
+                type="submit"
+                class="botao botao-adicionar"
+            >
+                Cadastrar Produto
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ produto.nome }} - Sistema Agro
+{% endblock %}
+
+{% block content %}
+
+<div class="detalhe-produto">
+
+
+<h1>{{ produto.nome }}</h1>
+
+<!-- ========================= -->
+<!-- IMAGEM -->
+<!-- ========================= -->
+
+{% if produto.imagem %}
+    <div class="imagem-produto">
+        <img
+            src="{{ produto.imagem.url }}"
+            alt="{{ produto.nome }}"
+        >
+    </div>
+{% endif %}
+
+
+<!-- ========================= -->
+<!-- DESCRIÇÃO -->
+<!-- ========================= -->
+
+<div class="informacao-produto">
+
+    <h2>Descrição</h2>
+
+    {% if produto.descricao %}
+        <p>{{ produto.descricao }}</p>
+    {% else %}
+        <p>Nenhuma descrição cadastrada.</p>
+    {% endif %}
+
+</div>
+
+
+
+<!-- VÍDEO -->
+ 
+<div class="video-produto">
+
+    <h2>Vídeo do produto</h2>
+
+    {% if produto.video %}
+
+        <video
+            controls
+            class="video-responsivo"
+        >
+            <source
+                src="{{ produto.video.url }}"
+                type="video/mp4"
+            >
+
+            Seu navegador não suporta a reprodução de vídeos.
+        </video>
+
+    {% else %}
+
+        <p>
+            Este produto ainda não possui vídeo cadastrado.
+        </p>
+
+        <form
+            method="POST"
+            action="{% url 'cadastrar_video' produto.id %}"
+            enctype="multipart/form-data"
+        >
+
+            {% csrf_token %}
+
+            <label for="video">
+                Escolha um vídeo:
+            </label>
+
+            <input
+                type="file"
+                name="video"
+                id="video"
+                accept="video/*"
+                required
+            >
+
+            <br><br>
+
+            <button
+                type="submit"
+                class="botao"
+            >
+                Cadastrar vídeo
+            </button>
+
+        </form>
+
+    {% endif %}
+
+</div>
+
+
+
+
+<!-- ========================= -->
+<!-- INFORMAÇÕES -->
+<!-- ========================= -->
+
+<div class="informacao-produto">
+
+    <p>
+        <strong>Preço:</strong>
+        R$ {{ produto.preco }}
+    </p>
+
+    <p>
+        <strong>Quantidade:</strong>
+        {{ produto.quantidade }}
+    </p>
+
+    {% if produto.categoria %}
+        <p>
+            <strong>Categoria:</strong>
+            {{ produto.categoria.nome }}
+        </p>
+    {% endif %}
+
+</div>
+
+
+<!-- ========================= -->
+<!-- BOTÃO VOLTAR -->
+<!-- ========================= -->
+
+<div class="acoes-formulario">
+
+    <a
+        href="{% url 'lista_produtos' %}"
+        class="botao"
+    >
+        Voltar
+    </a>
+
+</div>
+
+
+</div>
+
+{% endblock %}

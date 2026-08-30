@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Chuva
+{% endblock %}
+
+{% block content %}
+
+<h1>🌧️ Previsão de Chuva</h1>
+
+<form method="GET">
+
+    <input
+        type="text"
+        name="cidade"
+        placeholder="Digite uma cidade"
+        required
+    >
+
+    <button type="submit">
+        🔎 Consultar
+    </button>
+
+</form>
+
+{% if erro %}
+
+    <p>{{ erro }}</p>
+
+{% endif %}
+
+{% if cidade %}
+
+    <h2>
+        🌧️ {{ cidade }}, {{ pais }}
+    </h2>
+
+    {% for horario in horarios %}
+
+        <div>
+
+            <strong>
+                {{ horario }}
+            </strong>
+
+            <p>
+                ☔ Probabilidade:
+                {{ probabilidades|slice:forloop.counter0|first }}%
+            </p>
+
+            <p>
+                💧 Precipitação:
+                {{ precipitacoes|slice:forloop.counter0|first }} mm
+            </p>
+
+        </div>
+
+    {% endfor %}
+
+{% endif %}
+
+{% endblock %}

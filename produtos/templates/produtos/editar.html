@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Editar Produto - Sistema Agro
+{% endblock %}
+
+{% block content %}
+
+<div class="formulario-container">
+
+    <h1>Editar Produto</h1>
+
+    <p>
+        Altere as informações do produto.
+    </p>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+
+        <!-- NOME -->
+
+        <div class="campo-formulario">
+
+            <label for="nome">
+                Nome do produto:
+            </label>
+
+            <input
+                type="text"
+                id="nome"
+                name="nome"
+                value="{{ produto.nome }}"
+                required
+            >
+
+        </div>
+
+
+        <!-- PREÇO -->
+
+        <div class="campo-formulario">
+
+            <label for="preco">
+                Preço:
+            </label>
+
+            <input
+                type="number"
+                id="preco"
+                name="preco"
+                value="{{ produto.preco }}"
+                step="0.01"
+                min="0"
+                required
+            >
+
+        </div>
+
+
+        <!-- QUANTIDADE -->
+
+        <div class="campo-formulario">
+
+            <label for="quantidade">
+                Quantidade:
+            </label>
+
+            <input
+                type="number"
+                id="quantidade"
+                name="quantidade"
+                value="{{ produto.quantidade }}"
+                min="0"
+                required
+            >
+
+        </div>
+
+
+        <!-- CATEGORIA -->
+
+        <div class="campo-formulario">
+
+            <label for="categoria">
+                Categoria:
+            </label>
+
+            <select
+                id="categoria"
+                name="categoria"
+                required
+            >
+
+                <option value="">
+                    Selecione uma categoria
+                </option>
+
+                {% for categoria in categorias %}
+
+                    <option
+                        value="{{ categoria.id }}"
+                        {% if categoria.id == produto.categoria.id %}
+                            selected
+                        {% endif %}
+                    >
+                        {{ categoria.nome }}
+                    </option>
+
+                {% endfor %}
+
+            </select>
+
+        </div>
+
+
+        <!-- NOVA IMAGEM -->
+
+        <div class="campo-formulario">
+
+            <label for="imagem">
+                Nova imagem do produto:
+            </label>
+
+            <input
+                type="file"
+                id="imagem"
+                name="imagem"
+                accept="image/*"
+            >
+
+        </div>
+
+
+        <!-- IMAGEM ATUAL -->
+
+        
+{% if produto.imagem %}
+
+    <div class="campo">
+
+        <label>
+            Imagem atual
+        </label>
+
+        <div class="imagem-atual">
+
+            <img
+                src="{{ produto.imagem.url }}"
+                alt="{{ produto.nome }}"
+            >
+
+        </div>
+
+    </div>
+
+{% endif %}
+
+
+
+
+        <!-- BOTÕES -->
+
+        <div class="editar-acoes">
+
+            <button
+                type="submit"
+                class="btn-salvar"
+            >
+                Salvar alterações
+            </button>
+
+            <a
+                href="{% url 'lista_produtos' %}"
+                class="btn-cancelar"
+            >
+                Cancelar
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}
+

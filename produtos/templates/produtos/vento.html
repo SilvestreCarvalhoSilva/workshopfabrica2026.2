@@ -1,0 +1,93 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+Vento
+{% endblock %}
+
+{% block content %}
+
+<div class="clima-container">
+
+    <h1>💨 Previsão do Vento</h1>
+
+    <form method="GET" action="{% url 'vento_clima' %}">
+
+        <input
+            type="text"
+            name="cidade"
+            placeholder="Digite uma cidade"
+            value="{{ cidade|default:'' }}"
+            required
+        >
+
+        <button type="submit">
+            🔎 Consultar
+        </button>
+
+    </form>
+
+
+    {% if erro %}
+
+        <div class="erro-clima">
+            ⚠️ {{ erro }}
+        </div>
+
+    {% endif %}
+
+
+    {% if cidade %}
+
+        <h2>
+            💨 {{ cidade }}{% if pais %}, {{ pais }}{% endif %}
+        </h2>
+
+
+        {% if horarios %}
+
+            <div class="previsao-grid">
+
+                {% for horario in horarios %}
+
+                    <div class="previsao-card">
+
+                        <h3>
+                            🕐 {{ horario }}
+                        </h3>
+
+                        <p>
+                            💨 Velocidade do vento:
+                            <strong>
+                                {{ velocidades|slice:forloop.counter0|first }}
+                                km/h
+                            </strong>
+                        </p>
+
+                        <p>
+                            🧭 Direção:
+                            <strong>
+                                {{ direcoes|slice:forloop.counter0|first }}°
+                            </strong>
+                        </p>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <p>
+                Não há dados de vento disponíveis.
+            </p>
+
+        {% endif %}
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
+

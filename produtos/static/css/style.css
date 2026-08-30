@@ -1,0 +1,1007 @@
+/*daqui */
+:root {
+    --cor-primaria: #1b5e20;
+    --cor-secundaria: #2e7d32;
+}
+/* variaveis principais para os botões na */
+:root {
+    --cor-primaria: #1b5e20;
+    --cor-secundaria: #2e7d32;
+}
+/* até de cima até aqui categorias/5/editar/ */
+
+/* aqui dentro vai ficar as variaveis  para alterar a formatação dos  botões  da página : categorias/5/editar/   */
+
+:root {
+    --cor-primaria: #1b5e20;
+    --cor-secundaria: #2e7d32;
+}
+
+/* de cima até aqui */
+
+
+/*Aqui vai ficar  os camando gerais para a página : categorias/5/editar/     */
+
+/* =========================
+   EDITAR CATEGORIA categorias/5/editar/
+   ========================= */
+
+.editar-categoria-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+}
+
+.editar-categoria-container h1 {
+    color: var(--cor-primaria);
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+
+/* Campos do formulário */
+
+.campo-formulario {
+    margin-bottom: 20px;
+}
+
+.campo-formulario label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.campo-formulario input,
+.campo-formulario textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    outline: none;
+    transition: 0.3s;
+}
+
+.campo-formulario input:focus,
+.campo-formulario textarea:focus {
+    border-color: var(--cor-secundaria);
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15);
+}
+
+
+/* Área dos botões */
+
+.editar-acoes {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+
+/* Botão salvar */
+
+.btn-salvar {
+    border: none;
+    background-color: var(--cor-primaria);
+    color: white;
+    padding: 11px 20px;
+    border-radius: 7px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-salvar:hover {
+    background-color: var(--cor-secundaria);
+}
+
+
+/* Botão cancelar */
+
+.btn-cancelar {
+    background-color: #757575;
+    color: white;
+    padding: 11px 20px;
+    border-radius: 7px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-cancelar:hover {
+    background-color: #424242;
+}
+
+/*De cima até aqui* categorias/5/editar/ */
+
+
+
+
+
+
+
+.categorias-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.btn-cadastrar {
+    display: inline-block;
+    background-color: var(--cor-primaria);
+    color: white;
+    padding: 10px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.btn-editar {
+    display: inline-block;
+    background-color: var(--cor-secundaria);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-right: 15px;
+}
+
+.btn-excluir {
+    display: inline-block;
+    background-color: #c62828;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+
+/*Até aqui*/
+
+
+
+:root {
+    --cor-primaria:LimeGreen;
+    --cor-secundaria:MediumSlateBlue;
+}
+
+
+/* =========================
+   RESET
+   ========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   BODY
+   ========================= */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f4;
+    color: #222;
+}
+
+
+/* =========================
+   CABEÇALHO
+   ========================= */
+
+.cabecalho {
+    background-color: var(--cor-primaria);
+    color: white;
+
+    padding: 18px 40px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 18px;
+    flex-wrap: wrap;
+    flex: 1;
+}
+
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 14px;
+    border-radius: 8px;
+    transition: 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+
+.menu-api {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+
+.barra-api {
+    width: 220px;
+    padding: 10px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 999px;
+    background-color: rgba(255, 255, 255, 0.08);
+    color: white;
+    outline: none;
+    font-size: 14px;
+}
+
+
+.barra-api::placeholder {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+
+.lista-api {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    min-width: 220px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.16);
+    overflow: hidden;
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-6px);
+    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+}
+
+
+.barra-api:hover + .lista-api,
+.barra-api:focus + .lista-api,
+.menu-api:hover .lista-api,
+.menu-api:focus-within .lista-api,
+.menu-api.selecionado:hover .lista-api,
+.menu-api.selecionado:focus-within .lista-api {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+
+
+
+
+.api-categoria {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 12px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+
+.api-categoria:last-child {
+    border-bottom: none;
+}
+
+.api-titulo {
+    color: #2e7d32;
+    font-weight: 700;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+}
+
+.api-categoria .api-submenu {
+    display: none;
+}
+
+.api-categoria.aberto .api-submenu {
+    display: block;
+}
+
+
+.api-submenu {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 6px;
+}
+
+
+.lista-api a {
+    color: var(--cor-primaria);
+    padding: 10px 12px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+
+.api-submenu a {
+    padding: 6px 8px;
+    border-bottom: none;
+    border-radius: 999px;
+    background-color: #f1f8f2;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+
+.lista-api a:last-child {
+    border-bottom: none;
+}
+
+
+.lista-api a:hover {
+    background-color: #f1f8f2;
+}
+
+
+/* =========================
+   CONTEÚDO
+   ========================= */
+
+.conteudo {
+    width: 90%;
+    max-width: 1200px;
+
+    margin: 40px auto;
+
+    min-height: 70vh;
+}
+
+
+/* =========================
+   CABEÇALHO DOS PRODUTOS
+   ========================= */
+
+.cabecalho-produtos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 30px;
+}
+
+
+.cabecalho-produtos h1 {
+    margin-bottom: 8px;
+}
+
+
+.cabecalho-produtos p {
+    color: #666;
+}
+
+
+/* =========================
+   LISTA DE PRODUTOS
+   ========================= */
+
+.lista-produtos {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(280px, 1fr));
+
+    gap: 25px;
+}
+
+
+/* =========================
+   CARD DO PRODUTO
+   ========================= */
+
+.card-produto {
+    background-color: white;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.08);
+
+    transition: transform 0.2s;
+}
+
+
+.card-produto:hover {
+    transform: translateY(-4px);
+}
+
+
+.icone-produto {
+    font-size: 40px;
+
+    margin-bottom: 15px;
+}
+
+
+.informacoes-produto h2 {
+    margin-bottom: 15px;
+
+    color: var(--cor-primaria);
+}
+
+
+.informacoes-produto p {
+    margin-bottom: 8px;
+}
+
+
+/* =========================
+   AÇÕES
+   ========================= */
+
+.acoes {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+
+/* =========================
+   BOTÕES
+   ========================= */
+
+.botao {
+    display: inline-block;
+
+    padding: 10px 16px;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    background-color: #e0e0e0;
+
+    color: #222;
+
+    font-weight: bold;
+}
+
+
+.botao:hover {
+    opacity: 0.85;
+}
+
+
+.botao-adicionar {
+    background-color: var(--cor-secundaria);
+
+    color: white;
+}
+
+
+/* =========================
+   NENHUM PRODUTO
+   ========================= */
+
+.sem-produtos {
+    background-color: white;
+
+    text-align: center;
+
+    padding: 60px 20px;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+
+.sem-produtos h2 {
+    margin-bottom: 10px;
+}
+
+
+.sem-produtos p {
+    margin-bottom: 25px;
+
+    color: #666;
+}
+
+
+/* =========================
+   RODAPÉ
+   ========================= */
+
+.rodape {
+    background-color: var(--cor-primaria);
+
+    color: white;
+
+    text-align: center;
+
+    padding: 20px;
+}
+
+
+/* =========================
+   RESPONSIVIDADE
+   ========================= */
+
+@media (max-width: 600px) {
+
+    .cabecalho {
+        padding: 15px 20px;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+
+    nav {
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 10px;
+    }
+
+
+    .cabecalho-produtos {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 20px;
+    }
+
+
+    .conteudo {
+        width: 92%;
+    }
+
+}
+/* Daqui para baixo é outra coisa */
+
+
+/* =========================
+   FORMULÁRIO
+   ========================= */
+
+.formulario-container {
+    background-color: white;
+
+    width: 100%;
+    max-width: 600px;
+
+    margin: 0 auto;
+
+    padding: 35px;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+
+.formulario-container h1 {
+    color: var(--cor-primaria);
+
+    margin-bottom: 8px;
+}
+
+
+.formulario-container > p {
+    color: #666;
+
+    margin-bottom: 30px;
+}
+
+
+.campo {
+    display: flex;
+
+    flex-direction: column;
+
+    margin-bottom: 20px;
+}
+
+
+.campo label {
+    font-weight: bold;
+
+    margin-bottom: 8px;
+}
+
+
+.campo input,
+.campo select {
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 6px;
+
+    font-size: 16px;
+
+    outline: none;
+}
+
+
+.campo input:focus,
+.campo select:focus {
+    border-color: var(--cor-primaria);
+}
+
+
+.acoes-formulario {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-top: 30px;
+}
+
+
+button {
+    border: none;
+
+    cursor: pointer;
+
+    font-size: 16px;
+}
+
+
+@media (max-width: 600px) {
+
+    .formulario-container {
+        padding: 25px 20px;
+    }
+
+
+    .acoes-formulario {
+        flex-direction: column;
+
+        gap: 15px;
+
+        align-items: stretch;
+    }
+
+
+    .acoes-formulario .botao {
+        text-align: center;
+    }
+
+}
+
+/* Formatação para a parte de categorias */
+:root {
+    --cor-primaria: #1b5e20;
+    --cor-secundaria: #2e7d32;
+}
+
+
+/* =========================
+   CATEGORIAS
+   ========================= */
+
+.categorias-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.categorias-container h1 {
+    color: var(--cor-primaria);
+    margin-bottom: 25px;
+}
+
+
+/* Botão cadastrar */
+
+.btn-cadastrar {
+    display: inline-block;
+    background-color: var(--cor-primaria);
+    color: white;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-cadastrar:hover {
+    background-color: var(--cor-secundaria);
+}
+
+
+/* Card da categoria */
+
+.categoria-card {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+.categoria-card h2 {
+    color: var(--cor-primaria);
+    margin-top: 0;
+}
+
+.categoria-card p {
+    color: #555;
+}
+
+
+/* Área dos botões */
+
+.categoria-acoes {
+    margin-top: 15px;
+}
+
+.formulario-exclusao {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.formulario-exclusao .btn-excluir,
+.formulario-exclusao .btn-editar {
+    display: inline-block;
+    width: 180px;
+    text-align: center;
+}
+
+
+/* Botão editar */
+
+.btn-editar {
+    display: inline-block;
+    background-color: #6c757d;
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin-right: 8px;
+    transition: 0.3s;
+}
+
+.btn-editar:hover {
+    background-color: #495057;
+}
+
+
+/* Botão excluir */
+
+.btn-excluir {
+    display: inline-block;
+    background-color: #d32f2f;
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.btn-excluir:hover {
+    background-color: #2f7de1;
+}
+
+
+
+
+/* =========================
+   IMAGEM DO PRODUTO formatação de daqui até  lá em baixo
+   ========================= */
+
+
+.imagem-produto {
+    width: 180px;
+    height: 180px;
+    overflow: hidden;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+.imagem-produto img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+
+/* formatação da imagem do produto de cima até aqui */
+
+
+
+
+
+/* =========================
+   CARD DO PRODUTO
+   ========================= */
+
+.card-produto {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.08);
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 15px;
+
+    width: 100%;
+}
+
+
+/* =========================
+   IMAGEM DO PRODUTO
+   ========================= */
+
+.imagem-produto {
+    width: 100%;
+    height: 180px;
+
+    overflow: hidden;
+
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #f5f5f5;
+}
+
+.imagem-produto img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    display: block;
+}
+
+
+/* =========================
+   INFORMAÇÕES
+   ========================= */
+
+.informacoes-produto {
+    width: 100%;
+}
+
+.informacoes-produto h2 {
+    margin-bottom: 15px;
+
+    color: var(--cor-primaria);
+}
+
+.informacoes-produto p {
+    margin-bottom: 8px;
+}
+
+
+/* =========================
+   BOTÕES
+   ========================= */
+
+.acoes {
+    display: flex;
+
+    gap: 10px;
+
+    width: 100%;
+
+    margin-top: 5px;
+}
+
+.acoes .botao {
+    flex: 1;
+    text-align: center;
+}
+
+
+
+/* =========================
+   MENU PRINCIPA
+   ========================= */
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+/* Controlando imagem do cad dentro de editar( quando vc editar um produto) */
+.imagem-atual {
+    width: 100%;
+    max-width: 400px;
+    margin-top: 10px;
+}
+
+.imagem-atual img {
+    width: 100%;
+    max-width: 400px;
+    height: 250px;
+    object-fit: contain;
+    display: block;
+    border-radius: 10px;
+}
+
+/* até aqui*/
+
+
+/* =========================
+   VÍDEO DO PRODUTO
+   ========================= */
+
+.video-produto {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.video-produto h2 {
+    margin-bottom: 15px;
+}
+
+.video-responsivo {
+    width: 500px;
+    max-width: 100%;
+    height: 280px;
+    object-fit: contain;
+    border-radius: 10px;
+}
+

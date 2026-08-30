@@ -1,0 +1,103 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+Previsão do Clima
+{% endblock %}
+
+{% block content %}
+
+<div class="clima-container">
+
+    <h1>📅 Previsão do Clima</h1>
+
+    <!-- FORMULÁRIO -->
+    <form method="GET" action="{% url 'previsao_clima' %}">
+
+        <input
+            type="text"
+            name="cidade"
+            placeholder="Digite uma cidade..."
+            value="{{ cidade }}"
+            required
+        >
+
+        <button type="submit">
+            🔎 Consultar
+        </button>
+
+    </form>
+
+
+    <!-- ERRO -->
+    {% if erro %}
+
+        <div class="erro-clima">
+            ⚠️ {{ erro }}
+        </div>
+
+    {% endif %}
+
+
+    <!-- RESULTADO -->
+    {% if dias %}
+
+        <div class="resultado-clima">
+
+            <h2>
+                🌦️ {{ cidade }}{% if pais %}, {{ pais }}{% endif %}
+            </h2>
+
+
+            <div class="previsao-grid">
+
+                {% for dia in dias %}
+
+                    <div class="previsao-card">
+
+                        <h3>
+                            📅 {{ dia.data }}
+                        </h3>
+
+                        <p>
+                            🔥 Máxima:
+                            <strong>
+                                {{ dia.maxima }} °C
+                            </strong>
+                        </p>
+
+                        <p>
+                            ❄️ Mínima:
+                            <strong>
+                                {{ dia.minima }} °C
+                            </strong>
+                        </p>
+
+                        <p>
+                            🌧️ Chuva:
+                            <strong>
+                                {{ dia.chuva }} mm
+                            </strong>
+                        </p>
+
+                        <p>
+                            💨 Vento:
+                            <strong>
+                                {{ dia.vento }} km/h
+                            </strong>
+                        </p>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
+

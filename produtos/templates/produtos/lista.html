@@ -1,0 +1,142 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+Produtos - Sistema Agro
+{% endblock %}
+
+{% block content %}
+
+<script>
+    window.categoriasDisponiveis = [
+        {% for categoria in categorias %}
+            "{{ categoria.nome|escapejs }}"{% if not forloop.last %},{% endif %}
+        {% endfor %}
+    ];
+</script>
+
+<div class="cabecalho-produtos">
+
+    <div>
+
+        <h1>Produtos Agropecuários</h1>
+
+        <p>
+            Gerencie os produtos cadastrados no sistema.
+        </p>
+
+    </div>
+
+</div>
+
+
+{% if produtos %}
+
+    <div class="lista-produtos">
+
+        {% for produto in produtos %}
+
+            <div class="card-produto" data-categoria="{{ produto.categoria.nome }}">
+
+
+                <!-- IMAGEM DO PRODUTO -->
+
+                <div class="imagem-produto">
+
+                    {% if produto.imagem %}
+
+                        <img
+                            src="{{ produto.imagem.url }}"
+                            alt="{{ produto.nome }}"
+                        >
+
+                    {% else %}
+
+                        <div class="icone-produto">
+                            📦
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- INFORMAÇÕES DO PRODUTO -->
+
+                <div class="informacoes-produto">
+
+                    <h2>
+                        {{ produto.nome }}
+                    </h2>
+
+                    <p>
+                        <strong>Preço:</strong>
+                        R$ {{ produto.preco }}
+                    </p>
+
+                    <p>
+                        <strong>Quantidade:</strong>
+                        {{ produto.quantidade }}
+                    </p>
+
+                    <p>
+                        <strong>Categoria:</strong>
+                        {{ produto.categoria.nome }}
+                    </p>
+
+                </div>
+
+
+                <!-- BOTÕES -->
+
+                <div class="acoes">
+
+                    <a
+                        href="{% url 'detalhe_produto' produto.id %}"
+                        class="botao"
+                    >
+                        Ver
+                    </a>
+
+                    <a
+                        href="{% url 'editar_produto' produto.id %}"
+                        class="botao"
+                    >
+                        Editar
+                    </a>
+
+                    <a
+                        href="{% url 'excluir_produto' produto.id %}"
+                        class="botao btn-excluir"
+                    >
+                        Excluir
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+
+{% else %}
+
+    <div class="sem-produtos">
+
+        <h2>
+            Nenhum produto cadastrado
+        </h2>
+
+        <p>
+            Comece cadastrando seu primeiro produto.
+        </p>
+
+    </div>
+
+{% endif %}
+
+{% endblock %}
+

@@ -1,0 +1,77 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+Excluir Produto - Sistema Agro
+{% endblock %}
+
+{% block content %}
+
+<div class="editar-categoria-container">
+
+    <h1>Excluir Produto</h1>
+
+    <p>
+        Tem certeza que deseja excluir este produto?
+    </p>
+
+    <h2>
+        {{ produto.nome }}
+    </h2>
+
+    {% if produto.imagem %}
+
+        <div class="imagem-atual">
+
+            <img
+                src="{{ produto.imagem.url }}"
+                alt="{{ produto.nome }}"
+            >
+
+        </div>
+
+    {% endif %}
+
+    <p>
+        <strong>Preço:</strong>
+        R$ {{ produto.preco }}
+    </p>
+
+    <p>
+        <strong>Quantidade:</strong>
+        {{ produto.quantidade }}
+    </p>
+
+    <p>
+        <strong>Categoria:</strong>
+        {{ produto.categoria.nome }}
+    </p>
+
+    <div class="editar-acoes">
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <button
+                type="submit"
+                class="btn-excluir"
+            >
+            Excluir
+            </button>
+
+        </form>
+
+        <a
+            href="{% url 'lista_produtos' %}"
+            class="btn-cancelar"
+        >
+            Cancelar
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,853 @@
+
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+
+{% load static %}
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>
+    {% block title %}
+    Sistema Agro
+    {% endblock %}
+</title>
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+
+<header class="cabecalho">
+
+<div class="logo">
+    🌱 Sistema Agro
+</div>
+
+<nav>
+
+    <a href="{% url 'lista_produtos' %}">
+        Produtos
+    </a>
+
+    <a href="{% url 'cadastrar_produto' %}">
+        Cadastrar Produto
+    </a>
+
+    {% if request.path != '/produto/cadastrar/' %}
+
+        <a href="{% url 'lista_categorias' %}">
+            Categorias
+        </a>
+
+
+        <!-- =================================================
+             MENU DE APIS
+             ================================================= -->
+
+        <div class="menu-api">
+
+            <!-- BARRA DE PESQUISA -->
+
+            <input
+                type="text"
+                class="barra-api"
+                placeholder="🔎 Ex: chuva João Pessoa"
+                aria-label="Pesquisar categoria ou clima"
+            >
+
+
+            <!-- LISTA -->
+
+            <div class="lista-api">
+
+
+                <!-- =================================================
+                     CLIMA
+                     ================================================= -->
+
+                <div class="api-categoria">
+
+                    <div
+                        class="api-titulo"
+                        onclick="this.parentElement.classList.toggle('aberto')"
+                        style="cursor: pointer;"
+                    >
+                        🌦️ Clima
+                    </div>
+
+                    <div class="api-submenu">
+
+                        <a
+                            href="{% url 'clima_atual' %}"
+                            data-clima="atual"
+                        >
+                            🌡️ Atual
+                        </a>
+
+                        <a
+                            href="{% url 'previsao_clima' %}"
+                            data-clima="previsao"
+                        >
+                            📅 Previsão
+                        </a>
+
+                        <a
+                            href="{% url 'chuva_clima' %}"
+                            data-clima="chuva"
+                        >
+                            🌧️ Chuva
+                        </a>
+
+                        <a
+                            href="{% url 'vento_clima' %}"
+                            data-clima="vento"
+                        >
+                            💨 Vento
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     CATEGORIAS DO BANCO
+                     ================================================= -->
+
+                <div id="categorias-api">
+                </div>
+
+            </div>
+
+        </div>
+
+    {% endif %}
+
+</nav>
+
+</header>
+
+
+<main class="conteudo">
+
+{% block content %}
+{% endblock %}
+
+</main>
+
+
+<footer class="rodape">
+
+<p>
+    Sistema Agropecuário
+</p>
+
+</footer>
+
+
+{% if request.path != '/produto/cadastrar/' %}
+
+<script>
+
+/* =================================================
+   CATEGORIAS VINDAS DO DJANGO
+   ================================================= */
+
+window.categoriasDisponiveis = [
+
+    {% for categoria in categorias %}
+
+        "{{ categoria.nome|escapejs }}"
+
+        {% if not forloop.last %},{% endif %}
+
+    {% endfor %}
+
+];
+
+
+document.addEventListener(
+    'DOMContentLoaded',
+    function () {
+
+
+        /* =================================================
+           ELEMENTOS
+           ================================================= */
+
+        const menuApi =
+            document.querySelector(
+                '.menu-api'
+            );
+
+
+        const input =
+            document.querySelector(
+                '.barra-api'
+            );
+
+
+        const listaApi =
+            document.querySelector(
+                '.lista-api'
+            );
+
+
+        const cards =
+            document.querySelectorAll(
+                '.card-produto'
+            );
+
+
+        if (
+            !menuApi ||
+            !input ||
+            !listaApi
+        ) {
+            return;
+        }
+
+
+        /* =================================================
+           ATUALIZAR CATEGORIAS
+           ================================================= */
+
+        function atualizarOpcoes() {
+
+            const categorias =
+                new Set();
+
+
+            /* =================================================
+               CATEGORIAS DO BANCO
+               ================================================= */
+
+            if (
+                Array.isArray(
+                    window.categoriasDisponiveis
+                )
+            ) {
+
+                window.categoriasDisponiveis.forEach(
+                    function (categoria) {
+
+                        if (categoria) {
+
+                            categorias.add(
+                                categoria.trim()
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+
+
+            /* =================================================
+               CATEGORIAS DOS PRODUTOS
+               ================================================= */
+
+            cards.forEach(
+                function (card) {
+
+                    const categoria =
+                        (
+                            card.dataset.categoria
+                            || ''
+                        ).trim();
+
+
+                    if (categoria) {
+
+                        categorias.add(
+                            categoria
+                        );
+
+                    }
+
+                }
+            );
+
+
+            /* =================================================
+               CONTAINER
+               ================================================= */
+
+            const categoriasContainer =
+                document.querySelector(
+                    '#categorias-api'
+                );
+
+
+            if (!categoriasContainer) {
+                return;
+            }
+
+
+            categoriasContainer.innerHTML = '';
+
+
+            /* =================================================
+               CRIAR CATEGORIAS
+               ================================================= */
+
+            Array.from(categorias)
+                .sort()
+                .forEach(
+                    function (categoria) {
+
+
+                        const apiCategoria =
+                            document.createElement(
+                                'div'
+                            );
+
+
+                        apiCategoria.className =
+                            'api-categoria';
+
+
+                        /* =================================================
+                           TÍTULO
+                           ================================================= */
+
+                        const titulo =
+                            document.createElement(
+                                'div'
+                            );
+
+
+                        titulo.className =
+                            'api-titulo';
+
+
+                        titulo.textContent =
+                            '📁 ' + categoria;
+
+
+                        titulo.style.cursor =
+                            'pointer';
+
+
+                        /* =================================================
+                           SUBMENU
+                           ================================================= */
+
+                        const submenu =
+                            document.createElement(
+                                'div'
+                            );
+
+
+                        submenu.className =
+                            'api-submenu';
+
+
+                        /* =================================================
+                           LINK
+                           ================================================= */
+
+                        const link =
+                            document.createElement(
+                                'a'
+                            );
+
+
+                        link.href =
+                            '#';
+
+
+                        link.textContent =
+                            '🔎 Ver ' + categoria;
+
+
+                        /* =================================================
+                           CLICAR NO TÍTULO
+                           ================================================= */
+
+                        titulo.addEventListener(
+                            'click',
+                            function () {
+
+                                apiCategoria.classList.toggle(
+                                    'aberto'
+                                );
+
+                            }
+                        );
+
+
+                        /* =================================================
+                           CLICAR NA CATEGORIA
+                           ================================================= */
+
+                        link.addEventListener(
+                            'click',
+                            function (event) {
+
+                                event.preventDefault();
+
+
+                                const categoriaSelecionada =
+                                    categoria
+                                        .trim()
+                                        .toLowerCase();
+
+
+                                input.value =
+                                    categoria;
+
+
+                                /* =================================================
+                                   FILTRAR PRODUTOS
+                                   ================================================= */
+
+                                cards.forEach(
+                                    function (card) {
+
+                                        const categoriaProduto =
+                                            (
+                                                card.dataset.categoria
+                                                || ''
+                                            )
+                                            .trim()
+                                            .toLowerCase();
+
+
+                                        if (
+                                            categoriaProduto ===
+                                            categoriaSelecionada
+                                        ) {
+
+                                            card.style.display =
+                                                'flex';
+
+                                        } else {
+
+                                            card.style.display =
+                                                'none';
+
+                                        }
+
+                                    }
+                                );
+
+                            }
+                        );
+
+
+                        submenu.appendChild(
+                            link
+                        );
+
+
+                        apiCategoria.appendChild(
+                            titulo
+                        );
+
+
+                        apiCategoria.appendChild(
+                            submenu
+                        );
+
+
+                        categoriasContainer.appendChild(
+                            apiCategoria
+                        );
+
+                    }
+                );
+
+        }
+
+
+        /* =================================================
+           FILTRAR MENU
+           ================================================= */
+
+        function listarCategorias() {
+
+            const valor =
+                input.value
+                    .trim()
+                    .toLowerCase();
+
+
+            const itens =
+                listaApi.querySelectorAll(
+                    '.api-categoria'
+                );
+
+
+            itens.forEach(
+                function (item) {
+
+                    const texto =
+                        item.textContent
+                            .trim()
+                            .toLowerCase();
+
+
+                    item.style.display =
+                        !valor ||
+                        texto.includes(valor)
+                            ? 'block'
+                            : 'none';
+
+                }
+            );
+
+        }
+
+
+        /* =================================================
+           PESQUISAR CLIMA
+           ================================================= */
+
+        function pesquisarClima() {
+
+            const textoOriginal =
+                input.value.trim();
+
+
+            const valor =
+                textoOriginal.toLowerCase();
+
+
+            if (!valor) {
+
+                alert(
+                    'Digite uma cidade.'
+                );
+
+                return;
+
+            }
+
+
+            let tipo = '';
+            let cidade = '';
+
+
+            if (
+                valor.startsWith('previsão ')
+            ) {
+
+                tipo = 'previsao';
+
+                cidade =
+                    textoOriginal
+                        .substring(9)
+                        .trim();
+
+            }
+
+            else if (
+                valor.startsWith('previsao ')
+            ) {
+
+                tipo = 'previsao';
+
+                cidade =
+                    textoOriginal
+                        .substring(8)
+                        .trim();
+
+            }
+
+            else if (
+                valor.startsWith('chuva ')
+            ) {
+
+                tipo = 'chuva';
+
+                cidade =
+                    textoOriginal
+                        .substring(6)
+                        .trim();
+
+            }
+
+            else if (
+                valor.startsWith('vento ')
+            ) {
+
+                tipo = 'vento';
+
+                cidade =
+                    textoOriginal
+                        .substring(6)
+                        .trim();
+
+            }
+
+            else if (
+                valor.startsWith('atual ')
+            ) {
+
+                tipo = 'atual';
+
+                cidade =
+                    textoOriginal
+                        .substring(6)
+                        .trim();
+
+            }
+
+            else {
+
+                tipo = 'previsao';
+
+                cidade =
+                    textoOriginal;
+
+            }
+
+
+            if (!cidade) {
+
+                alert(
+                    'Digite o nome da cidade.'
+                );
+
+                return;
+
+            }
+
+
+            let url = '';
+
+
+            if (tipo === 'atual') {
+
+                url =
+                    "{% url 'clima_atual' %}";
+
+            }
+
+            else if (tipo === 'previsao') {
+
+                url =
+                    "{% url 'previsao_clima' %}";
+
+            }
+
+            else if (tipo === 'chuva') {
+
+                url =
+                    "{% url 'chuva_clima' %}";
+
+            }
+
+            else if (tipo === 'vento') {
+
+                url =
+                    "{% url 'vento_clima' %}";
+
+            }
+
+
+            if (url) {
+
+                window.location.href =
+                    url +
+                    '?cidade=' +
+                    encodeURIComponent(
+                        cidade
+                    );
+
+            }
+
+        }
+
+
+        /* =================================================
+           CLIQUE NOS ITENS DO CLIMA
+           ================================================= */
+
+        const linksClima =
+            listaApi.querySelectorAll(
+                '[data-clima]'
+            );
+
+
+        linksClima.forEach(
+            function (link) {
+
+                link.addEventListener(
+                    'click',
+                    function (event) {
+
+                        event.preventDefault();
+
+
+                        const cidade =
+                            input.value.trim();
+
+
+                        if (!cidade) {
+
+                            alert(
+                                'Digite primeiro o nome da cidade na barra de pesquisa.'
+                            );
+
+                            input.focus();
+
+                            return;
+
+                        }
+
+
+                        const tipo =
+                            link.dataset.clima;
+
+
+                        let url = '';
+
+
+                        if (
+                            tipo === 'atual'
+                        ) {
+
+                            url =
+                                "{% url 'clima_atual' %}";
+
+                        }
+
+                        else if (
+                            tipo === 'previsao'
+                        ) {
+
+                            url =
+                                "{% url 'previsao_clima' %}";
+
+                        }
+
+                        else if (
+                            tipo === 'chuva'
+                        ) {
+
+                            url =
+                                "{% url 'chuva_clima' %}";
+
+                        }
+
+                        else if (
+                            tipo === 'vento'
+                        ) {
+
+                            url =
+                                "{% url 'vento_clima' %}";
+
+                        }
+
+
+                        if (url) {
+
+                            window.location.href =
+                                url +
+                                '?cidade=' +
+                                encodeURIComponent(
+                                    cidade
+                                );
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
+        /* =================================================
+           PASSAR O MOUSE NA BARRA/MENU
+           ================================================= */
+
+        menuApi.addEventListener(
+            'mouseenter',
+            function () {
+
+                listarCategorias();
+
+            }
+        );
+
+
+        /* =================================================
+           FOCO NA BARRA
+           ================================================= */
+
+        input.addEventListener(
+            'focus',
+            function () {
+
+                listarCategorias();
+
+            }
+        );
+
+
+        /* =================================================
+           DIGITAÇÃO
+           ================================================= */
+
+        input.addEventListener(
+            'input',
+            function () {
+
+                listarCategorias();
+
+            }
+        );
+
+
+        /* =================================================
+           ENTER
+           ================================================= */
+
+        input.addEventListener(
+            'keydown',
+            function (event) {
+
+                if (
+                    event.key === 'Enter'
+                ) {
+
+                    event.preventDefault();
+
+                    /*
+                     * Mantém a pesquisa do clima.
+                     */
+                    pesquisarClima();
+
+                }
+
+            }
+        );
+
+
+        /* =================================================
+           INICIAR
+           ================================================= */
+
+        atualizarOpcoes();
+
+    }
+);
+
+</script>
+
+{% endif %}
+
+</body>
+
+</html>

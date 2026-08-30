@@ -1,0 +1,54 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+Categorias - Sistema Agro
+{% endblock %}
+
+{% block content %}
+
+<div class="categorias-container">
+
+    <h1>Categorias</h1>
+
+    <a href="{% url 'cadastrar_categoria' %}" class="btn-cadastrar">
+        + Cadastrar Categoria
+    </a>
+
+    <hr>
+
+    {% if categorias %}
+
+        {% for categoria in categorias %}
+
+            <div class="categoria-card">
+
+                <h2>{{ categoria.nome }}</h2>
+
+                <p>
+                    {{ categoria.descricao }}
+                </p>
+
+                <div class="categoria-acoes">
+                    <a href="{% url 'editar_categoria' categoria.id %}" class="btn-editar">
+                        Editar
+                    </a>
+
+                    <button type="button" class="btn-excluir" data-url="{% url 'excluir_categoria' categoria.id %}" onclick="if (confirm('Confirmar exclusão')) { const form = document.createElement('form'); form.method = 'POST'; form.action = this.dataset.url; const csrf = document.createElement('input'); csrf.type = 'hidden'; csrf.name = 'csrfmiddlewaretoken'; csrf.value = '{{ csrf_token }}'; form.appendChild(csrf); document.body.appendChild(form); form.submit(); }">
+                        Excluir
+                    </button>
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>Nenhuma categoria cadastrada.</p>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

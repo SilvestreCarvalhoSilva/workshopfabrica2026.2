@@ -1,0 +1,91 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+Clima - Sistema Agro
+{% endblock %}
+
+{% block content %}
+
+<div class="editar-categoria-container">
+
+    <h1>🌦️ Clima Atual</h1>
+
+    <form method="GET">
+
+        <div class="campo-formulario">
+
+            <label for="cidade">
+                Cidade
+            </label>
+
+            <input
+                type="text"
+                id="cidade"
+                name="cidade"
+                placeholder="Digite uma cidade"
+                value="{{ cidade|default:'' }}"
+                required
+            >
+
+        </div>
+
+        <div class="editar-acoes">
+
+            <button
+                type="submit"
+                class="btn-salvar"
+            >
+                Consultar clima
+            </button>
+
+        </div>
+
+    </form>
+
+
+    {% if erro %}
+
+        <div class="mensagem-erro">
+
+            <strong>Erro:</strong>
+            {{ erro }}
+
+        </div>
+
+    {% endif %}
+
+
+    {% if temperatura is not None %}
+
+        <hr>
+
+        <h2>
+            {{ cidade }}{% if pais %}, {{ pais }}{% endif %}
+        </h2>
+
+        <p>
+            🌡️ <strong>Temperatura:</strong>
+            {{ temperatura }} °C
+        </p>
+
+        <p>
+            💧 <strong>Umidade:</strong>
+            {{ umidade }} %
+        </p>
+
+        <p>
+            🌧️ <strong>Precipitação:</strong>
+            {{ precipitacao }} mm
+        </p>
+
+        <p>
+            💨 <strong>Vento:</strong>
+            {{ vento }} km/h
+        </p>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
